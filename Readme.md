@@ -1,8 +1,8 @@
-# SparkPath OS
+# Talent x AI
 
 **An Interactive AI-Driven Career Exploration & Voice Assistant Platform**  
 
-**SparkPath OS** is an immersive platform that empowers users to explore career paths, simulate day-to-day experiences, interact with AI-powered agents, and manage personal portfolios. With voice-enabled AI, 3D avatars, and real-time chat agents, SparkPath OS provides a unique, hands-on way to discover and shape your career journey.  
+**Talent x AI** is an immersive platform that empowers users to explore career paths, simulate day-to-day experiences, interact with AI-powered agents, and manage personal portfolios. With voice-enabled AI, 3D avatars, and real-time chat agents, SparkPath OS provides a unique, hands-on way to discover and shape your career journey.  
 
 ---
 
