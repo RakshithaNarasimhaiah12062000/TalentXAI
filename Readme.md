@@ -20,7 +20,7 @@
 
 ## Architecture
 
-![TalentX AI Architecture]([https://github.com/PalakKakani/TalentXAI/edit/main/Image/Architecture.png])  
+![TalentX AI Architecture]([Image/Architecture.png])  
 
 ---
 
@@ -53,29 +53,47 @@ pip install -r requirements.txt
 
 ### 3. Configure AWS Services
 
-TalentX AI requires AWS services:
+TalentX AI requires the following AWS services to run properly:
 
-* **S3 Bucket:** Store portfolios, voice recordings, and generated content.
-* **DynamoDB Table:** Store chat history and agent state.
-* **AWS Bedrock Agents:** For Multi-Agent Chatbot:
+* **S3 Bucket**  
+  - Store user portfolios, audio recordings, and generated content.  
+  - Ensure the bucket name matches the one used in the code.
 
-  * Create **Master Agent** and **Sub-Agents** (Profile, Skill Mapping, Career Pathway, Portfolio).
-  * Configure each agent with instructions to handle its role.
+* **DynamoDB Table**  
+  - Store chat history, session data, and agent state.  
+  - Make sure the table schema matches your code configuration.
+
+* **AWS Bedrock Agents (Multi-Agent Chatbot)**  
+  1. Create the **Master Agent**.  
+     - This agent routes user queries to the correct sub-agent and aggregates responses.  
+     - Replace the placeholder `MASTER_AGENT_ID` in your code with the actual Master Agent ID.  
+  2. Create the **Sub-Agents**:  
+     - **Profile Agent** – handles user profile and personal info.  
+     - **Skill Mapping Agent** – evaluates skills and suggests potential roles.  
+     - **Career Pathway Agent** – recommends career paths and milestones.  
+     - **Portfolio Agent** – manages portfolio content and S3 storage.  
+     - Replace the respective IDs in the code for each sub-agent (`PROFILE_AGENT_ID`, `SKILL_AGENT_ID`, etc.) with your actual agent IDs.  
+  3. Configure each agent with instructions/prompts for its role.  
+     - Example prompts are provided in the Multi-Agent Instructions table.  
+     - You can further refine and expand prompts to improve agent behavior.  
+
+> ⚠️ You must create your own AWS resources; pre-built agents cannot be shared.  
+
 ## Multi-Agent Instructions
 
-| Agent Type       | Agent Name          | Purpose / Role Description                                                                 | Example Instructions / Prompts                                                                 |
-|-----------------|-------------------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **Master Agent** | Master Agent       | Routes user queries to appropriate sub-agents and compiles final responses.               | - Receive user input (text/voice). <br> - Decide which sub-agent(s) to query. <br> - Aggregate and return responses. |
-| **Sub-Agent**    | Profile Agent      | Handles user profile, personal info, and identity-related queries.                        | - Analyze user's profile details. <br> - Suggest career archetypes. <br> - Update profile state in DynamoDB. |
-| **Sub-Agent**    | Skill Mapping Agent | Maps user's skills, strengths, and interests to potential roles and career paths.         | - Evaluate user's skills. <br> - Suggest skill improvements or roles. <br> - Return structured data to Master Agent. |
-| **Sub-Agent**    | Career Pathway Agent | Suggests possible career paths, timelines, and learning steps based on user input.        | - Recommend career pathways based on profile/skills. <br> - Provide suggested milestones. |
-| **Sub-Agent**    | Portfolio Agent     | Manages portfolio-related queries, generates content, and stores assets in S3.           | - Save user-generated content, conversation logs, and portfolio files. <br> - Provide links or summaries of portfolio assets. |
+| Agent Type       | Agent Name           | Purpose / Role Description                                                         | Example Instructions / Prompts                                                                                                                                                                                                           |
+| ---------------- | -------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Master Agent** | Master Agent         | Routes user queries to appropriate sub-agents and compiles final responses.        | - Receive user input (text/voice). <br> - Decide which sub-agent(s) to query. <br> - Aggregate and return responses. <br> - Example prompt: "Route this user input to the correct sub-agent and combine responses in friendly language." |
+| **Sub-Agent**    | Profile Agent        | Handles user profile, personal info, and identity-related queries.                 | - Analyze user's profile details. <br> - Suggest career archetypes. <br> - Update profile state in DynamoDB. <br> - Example prompt: "Assess the user's profile and suggest a career archetype with reasoning."                           |
+| **Sub-Agent**    | Skill Mapping Agent  | Maps user's skills, strengths, and interests to potential roles and career paths.  | - Evaluate user's skills. <br> - Suggest skill improvements or roles. <br> - Return structured data to Master Agent. <br> - Example prompt: "Map user's skills to potential career paths and suggest improvements."                      |
+| **Sub-Agent**    | Career Pathway Agent | Suggests possible career paths, timelines, and learning steps based on user input. | - Recommend career pathways based on profile/skills. <br> - Provide suggested milestones. <br> - Example prompt: "Create a detailed career roadmap with milestones based on user's profile and skills."                                  |
+| **Sub-Agent**    | Portfolio Agent      | Manages portfolio-related queries, generates content, and stores assets in S3.     | - Save user-generated content, conversation logs, and portfolio files. <br> - Provide links or summaries of portfolio assets. <br> - Example prompt: "Store and summarize user portfolio content in S3, returning accessible links."     |
 
 > ⚠️ Note: These instructions are **example prompts**. You can further refine and expand the prompts for each agent based on your specific use case. Each agent must be created separately in AWS Bedrock, and the Master Agent routes queries but does not contain the sub-agent logic itself.
 
 > ⚠️ You must create your own AWS resources; the pre-built agents cannot be shared.
 
-### 5. Run the App
+### 4. Run the App
 
 ```bash
 streamlit run app.py
