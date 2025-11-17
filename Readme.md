@@ -20,7 +20,7 @@
 
 ## Architecture
 
-![TalentX AI Architecture](path_to_your_architecture_image.png)  
+![TalentX AI Architecture]([path_to_your_architecture_image.png](https://github.com/PalakKakani/TalentXAI/edit/main/Image/Architecture.png))  
 
 ---
 
