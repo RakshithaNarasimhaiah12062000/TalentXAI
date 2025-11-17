@@ -30,9 +30,6 @@ if params.get("next", ["false"])[0].lower() == "true":
 # -----------------------------------
 # Avatar Selector Page
 # -----------------------------------
-# -----------------------------------
-# Avatar Selector Page
-# -----------------------------------
 def avatar_selector_page():
     st.title("🎨 Talent X AI")
 
