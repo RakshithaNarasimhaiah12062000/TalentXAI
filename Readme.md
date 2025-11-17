@@ -20,7 +20,7 @@
 
 ## Architecture
 
-![TalentX AI Architecture](Image/Architecture.png)  
+![TalentX AI Architecture](Image/Architecture Talent X AI.png)  
 
 ---
 
