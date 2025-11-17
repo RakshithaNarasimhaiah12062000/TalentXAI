@@ -7,16 +7,6 @@ from botocore.config import Config
 # PAGE CONFIG (GLOBAL)
 # ============================
 
-# st.set_page_config(
-#     page_title="ENT.XP + Spark Labs",
-#     layout="centered",
-#     page_icon="🎬",
-# )
-
-# ============================
-# BEDROCK CONFIG (SHARED)
-# ============================
-
 BEDROCK_REGION = "us-east-1"
 BEDROCK_MODEL_ID = "meta.llama3-8b-instruct-v1:0"
 
